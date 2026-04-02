@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Zaya — 探索 (Opt 2)</title>
+<title>Zaya — 探索 (MVP)</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -19,10 +19,8 @@
   --cream:#FFFDFB;
   --border:rgba(30,43,36,.07);
   --shadow-soft:0 4px 24px rgba(30,43,36,.06);
-  --shadow:0 10px 36px rgba(30,43,36,.09);
   --shadow-card:0 12px 40px rgba(30,43,36,.08),0 1px 0 rgba(255,255,255,.6) inset;
   --radius:26px;
-  --radius-sm:18px;
   --serif:'Noto Serif SC',Georgia,'Songti SC',serif;
   --sans:'Noto Sans SC',-apple-system,'PingFang SC',sans-serif;
 }
@@ -32,7 +30,6 @@ body{
   background:radial-gradient(ellipse 120% 80% at 50% -20%,#E8E0D8 0%,#D8D0C8 45%,#C9C2BD 100%);
   color:var(--ink);display:flex;justify-content:center;min-height:100vh;padding:16px;
 }
-
 .phone-frame{
   width:393px;max-width:100%;background:var(--bg);border-radius:44px;overflow:hidden;
   box-shadow:0 32px 80px rgba(20,30,25,.14),0 0 0 1px rgba(255,255,255,.5) inset;
@@ -41,28 +38,21 @@ body{
 .notch{width:126px;height:34px;background:#1a1a1a;border-radius:20px;position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:20}
 .screen{height:852px;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:80px}
 .screen::-webkit-scrollbar{display:none}
-
 .header{padding:52px 22px 6px}
 .greeting{font-family:var(--serif);font-size:13px;font-style:italic;color:var(--muted-2)}
 .header h1{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--ink);letter-spacing:-.02em}
 
-/* ---- 大问题卡 ---- */
 .question-card{
   margin:20px 16px 0;padding:24px 20px 22px;
   border-radius:var(--radius);position:relative;overflow:hidden;
   background:linear-gradient(158deg,#FFFDFB 0%,#F3EBE4 38%,#E5D9CE 100%);
   border:1px solid rgba(255,255,255,.85);
   box-shadow:var(--shadow-card);
-  transition:opacity .3s ease,transform .3s ease;
+  transition:opacity .2s ease;
 }
 .question-card::before{
   content:'';position:absolute;top:-36px;right:-36px;width:168px;height:168px;border-radius:50%;
   background:radial-gradient(circle,rgba(139,107,148,.16) 0%,transparent 72%);
-}
-.question-card::after{
-  content:'';position:absolute;bottom:-28px;left:-24px;width:128px;height:128px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,165,116,.1) 0%,transparent 72%);
-  pointer-events:none;
 }
 .q-context{
   display:inline-block;padding:4px 10px;border-radius:999px;
@@ -80,45 +70,30 @@ body{
   color:var(--ink);position:relative;z-index:1;
   letter-spacing:.015em;
 }
-.q-actions{
-  display:flex;align-items:center;gap:12px;margin-top:18px;position:relative;z-index:1;
-}
 .btn-reflect{
-  display:inline-flex;align-items:center;gap:8px;padding:13px 26px;
+  display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:13px 26px;
   background:linear-gradient(145deg,#2D3D34 0%,#1E2B24 52%,#152018 100%);
   color:#fff;border:none;border-radius:999px;
   font:inherit;font-size:14px;font-weight:600;cursor:pointer;
   box-shadow:0 6px 20px rgba(30,43,36,.26),0 1px 0 rgba(255,255,255,.1) inset;
-  transition:transform .15s,box-shadow .2s;
+  position:relative;z-index:1;
 }
 .btn-reflect:active{transform:scale(.97)}
 .btn-reflect svg{width:16px;height:16px;stroke:#fff;fill:none}
-.btn-refresh{
-  width:48px;height:48px;flex-shrink:0;border-radius:50%;border:1px solid var(--border);
-  background:rgba(255,255,255,.72);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;
-  box-shadow:0 1px 0 rgba(255,255,255,.9) inset;
-  transition:transform .35s ease-out;
-}
-.btn-refresh:active{transform:rotate(200deg)}
-.btn-refresh svg{width:20px;height:20px;stroke:var(--muted);fill:none}
 
-/* ---- 话题 chips ---- */
 .topic-chips-wrap{margin:28px 0 0;padding:0 16px}
 .topic-chips-label{
   font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--muted-2);text-transform:uppercase;margin-bottom:10px;
 }
-.topic-chips{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
-}
+.topic-chips{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
 .topic-chip{
   display:flex;align-items:center;justify-content:center;
-  padding:9px 4px;border-radius:14px;border:1px solid rgba(255,255,255,.5);
+  padding:12px 8px;border-radius:14px;border:1px solid rgba(255,255,255,.5);
   background:rgba(255,255,255,.52);backdrop-filter:blur(8px);
-  cursor:pointer;white-space:nowrap;
-  font:inherit;font-size:12px;font-weight:600;color:var(--ink-soft);
+  cursor:pointer;
+  font:inherit;font-size:13px;font-weight:600;color:var(--ink-soft);
   box-shadow:var(--shadow-soft);
-  transition:background .2s,border-color .2s,color .2s,transform .12s,box-shadow .2s;
+  transition:background .2s,border-color .2s,color .2s,transform .12s;
 }
 .topic-chip:active{transform:scale(.97)}
 .topic-chip.active{
@@ -127,28 +102,20 @@ body{
   box-shadow:0 4px 14px rgba(107,74,117,.28);
 }
 
-/* ---- 历史横滑 ---- */
-.history-wrap{margin:32px 0 0;padding-bottom:0}
-.history-head{
-  display:flex;align-items:center;justify-content:space-between;padding:0 20px 10px;
-}
+.history-wrap{margin:32px 0 0}
+.history-head{display:flex;align-items:center;justify-content:space-between;padding:0 20px 10px}
 .history-head span{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--muted-2);text-transform:uppercase}
-.history-head button{font-size:12px;font-weight:600;color:var(--accent);background:none;border:none;cursor:pointer;font-family:inherit}
-.h-scroll{
-  display:flex;gap:10px;padding:0 16px 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;
-  scroll-snap-type:x mandatory;
-}
+.h-scroll{display:flex;gap:10px;padding:0 16px 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
 .h-scroll::-webkit-scrollbar{display:none}
 .history-card{
   flex:0 0 200px;scroll-snap-align:start;
   background:var(--cream);border:1px solid var(--border);border-radius:16px;
-  padding:14px 14px 16px;cursor:pointer;
+  padding:14px 14px 16px;
   box-shadow:0 2px 12px rgba(30,43,36,.04);
 }
 .history-card .hc-topic{font-size:10px;font-weight:700;color:var(--accent-deep);letter-spacing:.06em;margin-bottom:5px}
 .history-card .hc-q{font-family:var(--serif);font-size:13px;font-weight:500;color:var(--ink-soft);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 
-/* ---- 底部导航 ---- */
 .bottom-nav{
   position:absolute;bottom:10px;left:14px;right:14px;
   background:rgba(255,253,250,.9);backdrop-filter:blur(16px) saturate(1.15);
@@ -160,7 +127,6 @@ body{
 .nav-item.active{color:var(--accent-deep);font-weight:600;opacity:1}
 .nav-icon{font-size:17px}
 
-/* ---- Chat 全屏 ---- */
 .chat-overlay{
   position:fixed;inset:0;background:var(--bg);
   opacity:0;pointer-events:none;transition:opacity .25s;z-index:200;
@@ -178,21 +144,15 @@ body{
 }
 .chat-header-info{flex:1}
 .chat-header-name{font-size:15px;font-weight:600;color:var(--ink)}
-.chat-header-tag{font-size:10px;color:var(--muted);letter-spacing:.04em;margin-top:1px}
 .chat-body{
   flex:1;overflow-y:auto;padding:20px 16px 24px;
-  display:flex;flex-direction:column;gap:6px;
+  display:flex;flex-direction:column;gap:8px;
   -webkit-overflow-scrolling:touch;
 }
 .chat-body::-webkit-scrollbar{display:none}
 .chat-bubble{
-  max-width:82%;padding:12px 16px;border-radius:20px;
+  max-width:88%;padding:12px 16px;border-radius:20px;
   font-family:var(--sans);font-size:14px;line-height:1.6;color:var(--ink-soft);
-  animation:bubbleIn .35s ease-out both;
-}
-@keyframes bubbleIn{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:translateY(0)}
 }
 .chat-bubble.zaya{
   align-self:flex-start;
@@ -206,19 +166,6 @@ body{
   font-family:var(--serif);font-size:15px;font-weight:500;color:var(--ink);
   line-height:1.55;
 }
-.chat-bubble.zaya-accent{
-  align-self:flex-start;
-  background:rgba(139,107,148,.07);border:1px solid rgba(139,107,148,.12);
-  border-bottom-left-radius:6px;
-  font-family:var(--serif);font-style:italic;font-size:14px;color:var(--accent-deep);
-  line-height:1.55;
-}
-.chat-bubble.user-q{
-  align-self:flex-end;
-  background:var(--ink);color:#fff;
-  border-bottom-right-radius:6px;
-  font-family:var(--serif);font-size:14px;font-weight:500;line-height:1.5;
-}
 .chat-prompts{
   flex-shrink:0;padding:12px 16px calc(16px + env(safe-area-inset-bottom));
   border-top:1px solid var(--border);background:var(--bg);
@@ -228,57 +175,37 @@ body{
 .chat-prompt-btn{
   background:var(--cream);border:1px solid var(--border);padding:12px 14px;border-radius:18px;
   font-size:13px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.45;
-  transition:background .2s,border-color .2s;
 }
 .chat-prompt-btn:active{background:rgba(155,126,164,.08);border-color:var(--accent-2)}
-
-.toast{
-  position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:linear-gradient(135deg,#2D3D34,#1E2B24);color:#fff;
-  padding:12px 22px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;
-  transition:opacity .3s,transform .3s;z-index:300;max-width:300px;text-align:center;
-  box-shadow:0 8px 28px rgba(30,43,36,.22);
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 <div class="phone-frame">
 <div class="notch"></div>
 <div class="screen">
-
   <header class="header">
     <p class="greeting">下午好，Tina</p>
     <h1>探索</h1>
   </header>
 
-  <!-- 大问题卡 -->
   <div class="question-card" id="qcard">
-    <span class="q-context" id="q-context">12 宫 · 巨蟹</span>
-    <p class="q-insight" id="q-insight">你的太阳在 12 宫，很安静的位置。</p>
-    <p class="q-text" id="q-text">你上一次在人多的场合特别来劲，但回家立刻想断联——中间发生了什么？</p>
-    <div class="q-actions">
-      <button type="button" class="btn-reflect" id="btn-reflect">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        看 Zaya 怎么说
-      </button>
-      <button type="button" class="btn-refresh" id="btn-refresh" aria-label="换一个">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-      </button>
-    </div>
+    <span class="q-context" id="q-context"></span>
+    <p class="q-insight" id="q-insight"></p>
+    <p class="q-text" id="q-text"></p>
+    <button type="button" class="btn-reflect" id="btn-reflect">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      看 Zaya 怎么说
+    </button>
   </div>
 
-  <!-- 话题 -->
   <div class="topic-chips-wrap">
     <p class="topic-chips-label">话题</p>
     <div class="topic-chips" id="topic-chips"></div>
   </div>
 
-  <!-- 历史问题 -->
   <div class="history-wrap">
     <div class="history-head">
       <span>最近的问题</span>
-      <button type="button">查看全部</button>
     </div>
     <div class="h-scroll">
       <div class="history-card">
@@ -295,7 +222,6 @@ body{
       </div>
     </div>
   </div>
-
 </div>
 
 <nav class="bottom-nav">
@@ -306,13 +232,11 @@ body{
 </nav>
 </div>
 
-
 <div class="chat-overlay" id="chat-overlay">
   <div class="chat-header">
     <button type="button" class="chat-back" id="chat-back" aria-label="返回">←</button>
     <div class="chat-header-info">
       <div class="chat-header-name">Zaya</div>
-      <div class="chat-header-tag" id="chat-tag"></div>
     </div>
   </div>
   <div class="chat-body" id="chat-body"></div>
@@ -322,232 +246,64 @@ body{
   </div>
 </div>
 
-<div class="toast" id="toast" role="status"></div>
-
 <script>
 (function(){
+  /** MVP：每话题一条问题 + 短回复，无多题轮换、无 toast */
   var TOPICS = [
-    { id:'self',      name:'我自己' },
-    { id:'relation',  name:'关系' },
-    { id:'direction', name:'方向' },
-    { id:'family',    name:'家庭' },
-    { id:'dreams',    name:'直觉' },
-    { id:'create',    name:'创造力' },
-    { id:'chart',     name:'本命盘' },
-    { id:'transit',   name:'星象' }
+    { id:'self', name:'我自己', context:'12 宫 · 巨蟹', insight:'你的太阳在 12 宫，很安静的位置。',
+      question:'你上一次在人多的场合特别来劲，但回家立刻想断联——中间发生了什么？',
+      chat: {
+        bubbles: [
+          { type:'zaya', text:'你的太阳在 12 宫。别人看到的你常常是上升狮子在撑场面，真正的感受你很少第一时间说出来。' },
+          { type:'zaya-serif', text:'所以热闹过后想一个人待着，不一定是「不喜欢他们」，更像需要安静才能听见自己。' }
+        ],
+        prompts: ['什么样的人能让我不用翻译自己？', '我最近有没有在硬撑？']
+      }
+    },
+    { id:'relation', name:'关系', context:'金星双子 · 7 宫', insight:'你的金星在双子。',
+      question:'你有没有用过「拖着不回复」来维持一种还没被拒绝的安全感？',
+      chat: {
+        bubbles: [
+          { type:'zaya', text:'你的金星和月亮都在双子——你要的往往先是「聊得来」。但太阳在巨蟹，你又需要安全感。' },
+          { type:'zaya-serif', text:'有趣的人不安全、安全的人不有趣——你一直在找聊得来又不会走的人。' }
+        ],
+        prompts: ['我纠结的那个人，缺的是哪一半？', '什么样的关系我能真正待下来？']
+      }
+    },
+    { id:'direction', name:'方向', context:'木星 · 上升狮子', insight:'你的木星就在上升点旁边。',
+      question:'你现在手上的事情里，哪件做起来像在「玩」，哪件像在「交作业」？',
+      chat: {
+        bubbles: [
+          { type:'zaya', text:'木星合上升是很「敢试」的配置。你怕的常常不是失败，是做一件不够酷的事。' },
+          { type:'zaya-serif', text:'运气往往在你「算了先试试」的时候来，而不是等你完全准备好。' }
+        ],
+        prompts: ['我一直犹豫的那件事，到底在怕什么？', '如果不想那么多，我最想先试什么？']
+      }
+    },
+    { id:'chart', name:'本命盘', context:'本命盘', insight:'太阳巨蟹 12 宫，月亮金星双子。',
+      question:'你的木星合上升狮子——你是不是在「不当回事」的时候反而运气最好？',
+      chat: {
+        bubbles: [
+          { type:'zaya', text:'别人看到的你很亮，内心却很安静；情感节奏快，深层又要安全感——矛盾才是你最有意思的地方。' },
+          { type:'zaya-serif', text:'不必「解决」矛盾，给每一面留一点空间就好。' }
+        ],
+        prompts: ['我最大的矛盾点在哪？', '我的盘适合什么样的生活节奏？']
+      }
+    }
   ];
 
-  var QUESTIONS = {
-    'self': [
-      '你上一次在人多的场合特别来劲，但回家立刻想断联——中间发生了什么？',
-      '你最近有没有一件事做完觉得挺爽，但事后又给自己打了折扣？',
-      '你有没有某条朋友圈发了又删的经历？删的那一秒你在保护什么？',
-      '你最近一次熬夜不睡，是在想什么？还是什么都不想就是不想结束这一天？'
-    ],
-    'relation': [
-      '最近有没有一个人，聊着聊着你就不想回消息了？是什么让你突然熄火的？',
-      '你最近有没有发现自己在某个人面前开始「管理印象」了？你在管理什么？',
-      '你有没有用过「拖着不回复」来维持一种还没被拒绝的安全感？',
-      '你上一次在一段关系里主动退后，是因为不在乎了还是太在乎了？'
-    ],
-    'direction': [
-      '你现在手上的事情里，哪件做起来像在「玩」，哪件像在「交作业」？',
-      '如果有人现在给你一个机会，什么条件会让你秒答应？',
-      '你最近有没有羡慕过谁的生活？具体是羡慕哪个部分？',
-      '你怕的到底是做不好，还是做了一件不够酷的事？'
-    ],
-    'family': [
-      '你上次跟家里打完电话，挂了之后是松了口气还是更烦了？',
-      '你有没有发现自己对家人的付出方式，在朋友或恋爱里也在重复？',
-      '你什么时候第一次觉得「我不属于这里」的？那个瞬间长什么样？',
-      '你在家人面前的那个自己，和朋友面前的那个自己——哪个更累？'
-    ],
-    'chart': [
-      '你的巨蟹太阳落在 12 宫——你有没有觉得自己真正的感受，从来没完整地让任何人看到过？',
-      '你的月亮和金星都在双子——你有没有发现你喜欢一个人的速度和失去兴趣的速度一样快？',
-      '你的木星合上升狮子——你是不是在「不当回事」的时候反而运气最好？',
-      '你的土星也在巨蟹——「照顾别人」对你来说是本能还是负担？还是两个都是？'
-    ],
-    'transit': [
-      '金星正在过你的第 7 宫——你最近是不是比平时更容易想起某个人？',
-      '火星在双子加持你的表达——最近有没有一句话你特别想说但一直憋着？',
-      '水逆期间有没有某个「旧人」或「旧事」突然冒出来了？',
-      '木星正在扩张你的事业宫——你最近有没有感觉到什么新机会在靠近？'
-    ],
-    'dreams': [
-      '你最近有没有做过一个醒来还记得的梦？梦里什么感觉最强？',
-      '你有没有哪次「直觉很准」但完全说不出原因？',
-      '你有没有某个时刻突然觉得一件事「不对」，后来果然？',
-      '你会不会有时候觉得自己「知道」一些事，但不知道怎么知道的？'
-    ],
-    'create': [
-      '你最近有没有什么想做但还没动手的东西？什么在拦着你？',
-      '你做什么事情的时候最容易忘记时间？',
-      '你有没有觉得自己某个「没用的爱好」其实挺重要的？',
-      '你上一次纯粹因为「好玩」而开始做一件事，是什么时候？'
-    ]
-  };
+  var currentId = 'self';
 
-  var CONTEXT = {
-    'self':      '12 宫 · 巨蟹',
-    'relation':  '金星双子 · 7 宫',
-    'direction': '木星 · 上升狮子',
-    'family':    '4 宫 · 土星巨蟹',
-    'dreams':    '12 宫 · 海王星',
-    'create':    '5 宫 · 狮子上升',
-    'chart':     '本命盘',
-    'transit':   '近期行运'
-  };
-
-  var INSIGHT = {
-    'self': [
-      '你的太阳在 12 宫，很安静的位置。',
-      '你的土星和太阳待在同一个星座里。',
-      '你的月亮和金星挨得很近，都在双子。',
-      '12 宫是离「睡眠」最近的宫位。'
-    ],
-    'relation': [
-      '你的金星在双子。',
-      '你的上升狮子旁边站着木星。',
-      '你的月亮在双子，跑得很快的位置。',
-      '你的太阳在 12 宫，很深的位置。'
-    ],
-    'direction': [
-      '你的木星就在上升点旁边。',
-      '木星在狮子，很大方的位置。',
-      '你的盘里有不少双子的能量。',
-      '土星在巨蟹，一颗很认真的星。'
-    ],
-    'family': [
-      '巨蟹守护 4 宫，你的太阳也在巨蟹。',
-      '土星和太阳同星座，待在一起很久了。',
-      '太阳 12 宫，离家最远的位置。',
-      '月亮双子，太阳巨蟹。两种节奏。'
-    ],
-    'chart': [
-      '太阳巨蟹，12 宫。',
-      '月亮双子，金星也是。',
-      '木星合上升，狮子座。',
-      '土星巨蟹。'
-    ],
-    'transit': [
-      '金星这两周在过你的 7 宫。',
-      '火星在双子，路过你的星群。',
-      '水星在逆行。',
-      '木星正在你的事业宫附近。'
-    ],
-    'dreams': [
-      '你的太阳在 12 宫，离梦很近的位置。',
-      '12 宫是整张盘里最安静的角落。',
-      '巨蟹的直觉是天生的。',
-      '你的太阳在水象星座，12 宫。'
-    ],
-    'create': [
-      '你的上升在狮子，天生需要表达。',
-      '木星就在你的上升旁边。',
-      '双子月亮喜欢同时玩很多东西。',
-      '狮子上升的玩心比看起来的大。'
-    ]
-  };
-
-  var CHAT = {
-    'self': {
-      tag: '12 宫 · 巨蟹太阳',
-      bubbles: [
-        {type:'zaya', text:'这个问题挺好的。'},
-        {type:'zaya', text:'你的太阳在 12 宫，很安静的位置。大部分时候别人看到的你——松弛、自信、好像什么都不在乎——其实是上升狮子在替你撑场面。'},
-        {type:'accent', text:'但 12 宫太阳的人有一个特点：你真正的感受，从来不会第一时间说出来。'},
-        {type:'zaya', text:'不是刻意藏，是你觉得别人接不住，或者解释起来太累了，算了。'},
-        {type:'zaya', text:'所以你经常会有那种感觉——明明刚才很开心，回到家突然就想一个人待着。不是你不喜欢那些人，是你需要安静下来才能听到自己的声音。'}
-      ],
-      prompts: ['我的「想消失」是在充电还是在逃？', '什么样的人能让我不用翻译自己？', '我最近有没有在硬撑？']
-    },
-    'relation': {
-      tag: '金星双子 · 月亮双子',
-      bubbles: [
-        {type:'zaya', text:'你的金星和月亮都在双子。这两颗星决定了你在关系里怎么爱、怎么被爱。'},
-        {type:'serif', text:'你需要的不是一个对你好的人。你需要的是一个你聊不腻的人。'},
-        {type:'zaya', text:'一个人如果让你觉得「聊天没意思」，不管对你多好，你都待不长。反过来，一个能让你意外的人，你会不自觉靠近。'},
-        {type:'accent', text:'但你的太阳在巨蟹——你内心其实非常需要安全感。所以你经常遇到的矛盾是：有趣的人不安全，安全的人不有趣。'},
-        {type:'zaya', text:'你在找的其实是一个很稀有的组合：聊得来 + 不会走。'}
-      ],
-      prompts: ['我纠结的那个人，缺的是哪一半？', '我有没有因为「安全」而将就过？', '什么样的关系我能真正待下来？']
-    },
-    'direction': {
-      tag: '木星 · 上升狮子',
-      bubbles: [
-        {type:'zaya', text:'你的木星刚好落在上升点上。这是整张盘里最「开挂」的配置之一。'},
-        {type:'zaya', text:'有这个配置的人，运气通常比自己以为的好。机会会比你注意到的多。'},
-        {type:'accent', text:'但你有一个倾向：在准备好之前，你总觉得自己还不够好。'},
-        {type:'zaya', text:'你怕的其实不是做不好。是做了一件不够酷的事。「落俗」比「失败」更让你退缩。'},
-        {type:'serif', text:'你的运气不是在你准备好的时候来的。是在你说「算了先试试」的时候来的。'},
-        {type:'zaya', text:'你仔细回忆一下是不是这样。'}
-      ],
-      prompts: ['我一直犹豫的那件事，到底在怕什么？', '我的运气一般在什么状态下出现？', '如果不想那么多，我最想先试什么？']
-    },
-    'family': {
-      tag: '4 宫 · 土星巨蟹',
-      bubbles: [
-        {type:'zaya', text:'巨蟹守护第 4 宫——家庭。你的太阳也在巨蟹。'},
-        {type:'zaya', text:'这意味着家庭对你的影响比大部分人都深。不是那种「影响了你的性格」的深，是「影响了你怎么看自己」的深。'},
-        {type:'accent', text:'你的土星也在巨蟹。土星在哪里，哪里就会有一种「还不够」的感觉。'},
-        {type:'zaya', text:'所以在家庭这件事上，你可能一直有一种拉扯：你知道自己不完全属于那里，但又没办法完全切割。'},
-        {type:'zaya', text:'这个拉扯不是你的问题。是你的盘里本来就有的张力。看清它就好。'}
-      ],
-      prompts: ['我在家庭里学到的「付出方式」，有没有在别的关系里重复？', '我跟家人之间最舒服的距离是什么？', '我在家人面前和朋友面前，哪个更累？']
-    },
-    'dreams': {
-      tag: '12 宫 · 巨蟹',
-      bubbles: [
-        {type:'zaya', text:'你的太阳在 12 宫——离「梦」最近的位置。'},
-        {type:'zaya', text:'12 宫的人通常直觉很强，但你自己不一定意识到。因为你的直觉不是那种「灵光一闪」的类型，更像是一种安静的「知道」。'},
-        {type:'serif', text:'你经常会在事后发现：你第一反应就是对的。'},
-        {type:'accent', text:'巨蟹本身就是水象星座，感知力天生就强。加上 12 宫，你接收到的信息比你意识到的多得多。'},
-        {type:'zaya', text:'所以如果你有时候莫名觉得一件事「不对」，大概率是对的。相信那个感觉。'}
-      ],
-      prompts: ['我最近有没有忽略过自己的直觉？', '我的直觉一般在什么时候最准？', '有没有什么事我一直「知道」但没承认？']
-    },
-    'create': {
-      tag: '5 宫 · 狮子上升',
-      bubbles: [
-        {type:'zaya', text:'你的上升在狮子。狮子天生需要表达——不是表演，是把内在的东西变成可见的东西。'},
-        {type:'zaya', text:'而且木星就在你上升旁边，这意味着你在「创造」和「玩」的时候，运气和能量都是最好的。'},
-        {type:'accent', text:'你的双子月亮喜欢同时玩很多东西。这不是散——是你的大脑在不同领域之间找连接。'},
-        {type:'serif', text:'你最好的作品，大概率不是「认真做」出来的，是「玩着玩着」出来的。'},
-        {type:'zaya', text:'如果你最近有什么想做但一直没动手的东西——瓶颈大概率不是能力，是你把它看得太重了。'}
-      ],
-      prompts: ['我最近想做但没动手的东西是什么？', '我做什么的时候最容易忘记时间？', '如果纯粹为了好玩，我最想试什么？']
-    },
-    'chart': {
-      tag: '本命盘解读',
-      bubbles: [
-        {type:'zaya', text:'你的盘里有几个很有意思的配置。'},
-        {type:'serif', text:'太阳巨蟹 12 宫。月亮双子。金星双子。木星合上升狮子。土星巨蟹。'},
-        {type:'zaya', text:'简单来说：别人看到的你很亮（上升狮子 + 木星），但你内心其实非常安静（太阳 12 宫）。你的情感节奏很快（月亮金星双子），但你最深层的需求是安全感（太阳巨蟹）。'},
-        {type:'accent', text:'这些听起来矛盾，但矛盾才是你最有意思的地方。'},
-        {type:'zaya', text:'你不需要解决这些矛盾。你只需要让每一面都有空间。'}
-      ],
-      prompts: ['我的盘里最让人羡慕的配置是什么？', '我最大的矛盾点在哪？', '我的盘适合什么样的生活方式？']
-    },
-    'transit': {
-      tag: '近期行运',
-      bubbles: [
-        {type:'zaya', text:'最近有几个行运在影响你。'},
-        {type:'zaya', text:'金星这两周在过你的第 7 宫——关系宫。如果最近有个名字突然冒出来，或者你比平时更容易想起某个人，不用太意外。'},
-        {type:'accent', text:'火星在双子，正好路过你的月亮和金星。你最近说话可能比平时更直接，也更准。'},
-        {type:'zaya', text:'木星在你的事业宫附近。如果最近感觉到什么新机会在靠近——那个感觉是真的。'},
-        {type:'serif', text:'总的来说，最近是一个适合「往外走」的时间。不要待在舒适区里。'}
-      ],
-      prompts: ['金星过 7 宫对我具体意味着什么？', '最近有什么新机会我应该注意？', '这段时间最适合做什么？']
-    }
-  };
-
-  var currentTopic = 'self';
-  var currentQIdx = 0;
-
-  function getTopicObj(id){
-    for(var i=0;i<TOPICS.length;i++) if(TOPICS[i].id===id) return TOPICS[i];
+  function topicById(id){
+    for (var i = 0; i < TOPICS.length; i++) if (TOPICS[i].id === id) return TOPICS[i];
     return TOPICS[0];
+  }
+
+  function renderCard(){
+    var t = topicById(currentId);
+    document.getElementById('q-context').textContent = t.context;
+    document.getElementById('q-insight').textContent = t.insight;
+    document.getElementById('q-text').textContent = t.question;
   }
 
   function renderChips(){
@@ -556,67 +312,31 @@ body{
     TOPICS.forEach(function(t){
       var btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'topic-chip' + (t.id === currentTopic ? ' active' : '');
+      btn.className = 'topic-chip' + (t.id === currentId ? ' active' : '');
       btn.textContent = t.name;
       btn.addEventListener('click', function(){
-        if(currentTopic === t.id) return;
-        currentTopic = t.id;
-        currentQIdx = 0;
+        if (currentId === t.id) return;
+        currentId = t.id;
         renderChips();
-        animateQuestion();
+        renderCard();
       });
       wrap.appendChild(btn);
     });
   }
 
-  function showQuestion(){
-    var qs = QUESTIONS[currentTopic];
-    var ins = INSIGHT[currentTopic];
-    currentQIdx = currentQIdx % qs.length;
-    document.getElementById('q-context').textContent = CONTEXT[currentTopic];
-    document.getElementById('q-insight').textContent = ins[currentQIdx % ins.length];
-    document.getElementById('q-text').textContent = qs[currentQIdx];
-  }
-
-  function animateQuestion(){
-    var card = document.getElementById('qcard');
-    card.style.opacity = '0';
-    card.style.transform = 'scale(.97)';
-    setTimeout(function(){
-      showQuestion();
-      card.style.opacity = '1';
-      card.style.transform = 'scale(1)';
-    }, 150);
-  }
-
-  renderChips();
-  showQuestion();
-
-  document.getElementById('btn-refresh').addEventListener('click', function(){
-    currentQIdx++;
-    animateQuestion();
-  });
-
   var chatOverlay = document.getElementById('chat-overlay');
   var chatBodyEl = document.getElementById('chat-body');
   var chatPromptsEl = document.getElementById('chat-prompts');
-  var chatTagEl = document.getElementById('chat-tag');
 
   function openChat(){
-    var c = CHAT[currentTopic];
-    if(!c) return;
-    var qs = QUESTIONS[currentTopic];
-    var qText = qs[currentQIdx % qs.length];
-    chatTagEl.textContent = '';
+    var t = topicById(currentId);
+    var c = t.chat;
     chatBodyEl.innerHTML = '';
-    var delay = 100;
     c.bubbles.forEach(function(b){
       var div = document.createElement('div');
-      div.className = 'chat-bubble ' + (b.type === 'serif' ? 'zaya-serif' : b.type === 'accent' ? 'zaya-accent' : 'zaya');
+      div.className = 'chat-bubble ' + (b.type === 'zaya-serif' ? 'zaya-serif' : 'zaya');
       div.textContent = b.text;
-      div.style.animationDelay = delay + 'ms';
       chatBodyEl.appendChild(div);
-      delay += 80;
     });
     chatPromptsEl.innerHTML = '';
     c.prompts.forEach(function(p){
@@ -624,25 +344,16 @@ body{
       btn.type = 'button';
       btn.className = 'chat-prompt-btn';
       btn.textContent = p;
-      btn.addEventListener('click', function(){ showToast('正在打开对话…'); closeChat(); });
+      btn.addEventListener('click', function(){ chatOverlay.classList.remove('open'); });
       chatPromptsEl.appendChild(btn);
     });
     chatOverlay.classList.add('open');
   }
-  function closeChat(){
-    chatOverlay.classList.remove('open');
-  }
 
+  renderChips();
+  renderCard();
   document.getElementById('btn-reflect').addEventListener('click', openChat);
-  document.getElementById('chat-back').addEventListener('click', closeChat);
-
-  function showToast(m){
-    var t = document.getElementById('toast');
-    t.textContent = m;
-    t.classList.add('show');
-    clearTimeout(showToast._t);
-    showToast._t = setTimeout(function(){ t.classList.remove('show'); }, 2200);
-  }
+  document.getElementById('chat-back').addEventListener('click', function(){ chatOverlay.classList.remove('open'); });
 })();
 </script>
 </body>
